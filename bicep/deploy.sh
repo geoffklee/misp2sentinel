@@ -4,7 +4,7 @@ set -x
 
 ###############################################################################################
 #                                                                                             #
-# You need these: https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local #
+# You need the Azure CLI tools installed                                                      #
 #                                                                                             #
 ###############################################################################################
 subscriptionName="${1}"
@@ -35,7 +35,7 @@ if [ $4 == 'yes' ]
 then
   # Publish to azure and carry out a remote build. 
   ( cd ../AzureFunction
-    zip -yr ../AzureFunction.zip .
-    az functionapp deployment source config-zip -g "${rgName}" -n "${app_name}" --src ../AzureFunction.zip
+    zip -yr ../AzureFunction-deploy.zip .
+    az functionapp deployment source config-zip -g "${rgName}" -n "${app_name}" --src ../AzureFunction-deploy.zip
   )
 fi
