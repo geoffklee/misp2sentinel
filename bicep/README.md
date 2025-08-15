@@ -1,18 +1,22 @@
 # Bicep deployment files
 
-The script `deploy.h` can be used with the bicep files in this directory to deloy a complete set of resources for this connector.
+The script `deploy.sh` can be used with the bicep files in this directory to deploy a complete set of resources for this connector.
 
 ## Prerequisites
 You will need to have the following:
 * The az cli installed
 * The necessary permissions to create resources in your resource group
+* Permissions to create an App Registration in Entra (see bottom of this document)
 
 ## A note on networking
-The recommended configuration for allowing the function app to securely access the storage account and Key Vault is 
+The recommended configuration to allow the Function App to securely access the storage account and Key Vault is 
 to use [Virtual Network (vnet) Integration](https://learn.microsoft.com/en-us/azure/azure-functions/functions-networking-options?tabs=azure-portal#virtual-network-integration)
 
 > **WARNING**: If VNet integration is not enabled (default), all services are created with unrestricted public network access.
+
 ### Function App VNet Integration
+The bicep code won't attempt to create a virtual network or subnet, but you can enable virtual network integration on the function app by passing in the ID of a pre-existing subnet for it to integrate with.
+
 - Enable with: `enableFunctionAppVNetIntegration = true`
 - Requires: `functionAppSubnetId` - Resource ID of a **delegated subnet** for Microsoft.App/environments
 - The function app subnet must be delegated to `Microsoft.App/environments` and must also have service endpoints
