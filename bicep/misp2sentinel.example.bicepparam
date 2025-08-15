@@ -33,11 +33,17 @@ param additionalAllowedNetworksKeyVault = []
 param additionalAllowedNetworksStorage = []
 
 // CIDR ranges that should be allowed to access the web interface of the function app
+// NB: the machine from which you deploy the function app needs to be able to access the SCM interface
+// of the app - so if you are using Vnet integration, and your deployment machine isn't part of the 
+// virtual network, you need to add its IP address here.
 param additionalAllowedNetworksApp = []
 
 // VNet Integration parameters (optional)
-// Function App VNet Integration (requires a delegated subnet)
-// The subnet must be delegated to the Microsoft.App/environments service
-// and have service endpoints enabled for Key Vault and Storage Accounts
-param enableVNetIntegration = true
+// If you set this to false, all resources will have unrestricted public network access.
+// If it is true, you need to specify an appropriate subnet below.
+param enableVNetIntegration = true 
+
+// The subnet must be delegated to the Microsoft.App/environments service (you may need 
+// enable the Microsoft.App resource provider on your subnet) and it should have service
+// endpoints enabled for Key Vault and Storage Account.
 param functionAppSubnetId = ''

@@ -29,7 +29,7 @@ specify additional IP ranges (eg your development PC) to have access through the
 ## Instructions
 * Clone this repository
 * `cd` to the `bicep` directory
-* Copy the `misp2sentinel.bicepparam.example` file to `misp2sentinel.bicepparam` and set values appropriately
+* Copy the `misp2sentinel.example.bicepparam` file to `misp2sentinel.bicepparam` and set values appropriately
 * Update the values in sharedNameVars.json: you may want to rework modules/namingscheme.bicep to suit your environment
 * run `az login` to ensure you are logged into the relevant Azure tenancy
 * run `./deploy.sh <subscription_name> <resource_group_name> <location> yes` (all parameters are mandatory; the final one controls whether the code is deployed after the infrastructure is created)

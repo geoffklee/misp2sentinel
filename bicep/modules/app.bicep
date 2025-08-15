@@ -25,7 +25,7 @@ resource functionApp 'Microsoft.Web/sites@2023-12-01' = {
       deployment: deploymentConfig
       runtime: { 
         name: 'python'
-        version: '3.11'
+        version: '3.12'
       }
       scaleAndConcurrency: {
         maximumInstanceCount: 40
@@ -35,8 +35,8 @@ resource functionApp 'Microsoft.Web/sites@2023-12-01' = {
       }
     }
     siteConfig: {
-      // NB you need access from wherever you're publishing
-      // the app from!
+      // NB you need access to the SCM interface from wherever 
+      // you're publishing the app from!
       publicNetworkAccess: 'Enabled'
       ipSecurityRestrictionsDefaultAction: 'Deny'
       ipSecurityRestrictions: map(allowedNetworksApp, ip => {
