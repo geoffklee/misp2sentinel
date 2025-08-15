@@ -4,3 +4,5 @@
 .vscode/tasks.json
 connector/*
 config.py
+misp2sentinel.bicepparam
+*.zip

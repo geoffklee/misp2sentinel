@@ -32,7 +32,7 @@ specify additional IP ranges (eg your development PC) to have access through the
 * Copy the `misp2sentinel.bicepparam.example` file to `misp2sentinel.bicepparam` and set values appropriately
 * Update the values in sharedNameVars.json: you may want to rework modules/namingscheme.bicep to suit your environment
 * run `az login` to ensure you are logged into the relevant Azure tenancy
-* run `./deploy.sh <subscription_name> <resource_group_name> <location>` (all three parameters are mandatory)
+* run `./deploy.sh <subscription_name> <resource_group_name> <location> yes` (all parameters are mandatory; the final one controls whether the code is deployed after the infrastructure is created)
 
 # What does it do?
 We create the following:
@@ -42,6 +42,7 @@ We create the following:
 * A storage account for the web app (necessary on the consumption plan)
 * A key vault (to store secrets)
 * An applicationInsights instance
+* An alert rule to notify an email address of any failures
 
 Once the resources are created, the script will attempt to use the `az functionapp deployment` command to deploy the code to the function app.
 
