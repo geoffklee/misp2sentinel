@@ -11,9 +11,7 @@ You will need to have the following:
 The recommended configuration for allowing the function app to securely access the storage account and Key Vault is 
 to use [Virtual Network (vnet) Integration](https://learn.microsoft.com/en-us/azure/azure-functions/functions-networking-options?tabs=azure-portal#virtual-network-integration)
 
-This Bicep template supports VNet integration, allowing the function app to securely access the key vault and 
-storage account.
-
+> **WARNING**: If VNet integration is not enabled (default), all services are created with unrestricted public network access.
 ### Function App VNet Integration
 - Enable with: `enableFunctionAppVNetIntegration = true`
 - Requires: `functionAppSubnetId` - Resource ID of a **delegated subnet** for Microsoft.App/environments
@@ -23,8 +21,6 @@ enabled for Storage and KeyVault
 When VNet integration is enabled:
 - The key vault and storage account have access restricted to only the integrated subnet; however, you can 
 specify additional IP ranges (eg your development PC) to have access through the `additionalAllowedNetworksKeyVault` and `additionalAllowedNetworksStorage` parameters.
-
-*** If VNet integration is not enabled (default), all services are created with unrestricted public network access. ***
 
 ## Instructions
 * Clone this repository
@@ -45,8 +41,10 @@ We create the following:
 
 Once the resources are created, the script will attempt to use the `az functionapp deployment` command to deploy the code to the function app.
 
-# Secrets
+# Secrets and app registration
 Once deployed, you need to manually create the following two secrets in the Key vault:
 
 * ClientSecret - the Client Secret for the App Registration that the app uses to authenticate
 * MISP-Key - The API key for the MISP service you are accessing
+
+Client Secret will be obtained when you [Register an Entra app](https://www.misp-project.org/2023/04/03/MISP-Sentinel.html/#:~:text=Azure%20App%20registration)
